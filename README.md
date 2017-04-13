@@ -22,6 +22,7 @@ python ./app.py
 4. Touch BME280 by finger to see temperature and humidity change on the web app.
 5. Modify : go checkout the API for the [mbed-connector-api-python library](https://docs.mbed.com/docs/mbed-connector-api-python/en/latest/) and make your own applications!
 
+  Make sure `\views\index.hbs` file is encoded as UTF8.
 
 ## Troubleshooting
 Here are some common problems and their solutions.
@@ -34,6 +35,3 @@ Dont worry about that warning message, it is not applicable to this demo, but li
 
 ##### ERROR 500 on trying to run the app.py file
 Make sure you added your [Access Key](https://connector.mbed.com/#accesskeys) to the app. You can do this by either changing the value of the `token` variable in the app.py file or by setting the `ACCESS_KEY` environment variable to your access key.
-
-
-Make sure `\views\index.hbs` file is encoded as UTF8.
