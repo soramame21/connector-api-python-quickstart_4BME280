@@ -1,7 +1,7 @@
-# mbed-connector-python-quickstart
-This is a quickstart application for the [mbed-connector-api-python](https://github.com/armmbed/mbed-connector-api-python) package. 
+# connector-api-python-quickstart_4BME280
+This is a quickstart application for the [mbed-connector-api-python](https://github.com/armmbed/mbed-connector-api-python) package.
 The goal of this application is to get the user up and running, using the mbed-connector-python package and talking to devices through mbed Device Connector in under 5 min, 5 steps or less.
-The quickstart webapp is meant to be paired with the [quickstart embedded app](https://github.com/ARMmbed/mbed-client-quickstart). The quickstart web app will allow the user to visualize quickstart embedded devices and interact with them. 
+The quickstart webapp is meant to be paired with the [BLEClient_mbedDevConn](https://github.com/soramame21/BLEClient_mbedDevConn) and the [BLE_Server_BME280](https://github.com/soramame21/BLE_Server_BME280). The quickstart web app will allow the user to see measured sensor value through Device Connector.
 
 ### Pre-requisites
 - A [mbed connector](https://connector.mbed.com) account and have generated an [API token](https://connector.mbed.com/#accesskeys)
@@ -18,9 +18,8 @@ The quickstart webapp is meant to be paired with the [quickstart embedded app](h
 ```python
 python ./app.py
 ```
-3. Open a web page to the web.py server. Usually [//localhost:8080](//localhost:8080) will work. 
-4. Interact with the web page, blink the LED's, subscribe to the resources, click the button on the board and see the numbers tick up on the web app.
-    {{TODO: insert gif's here}}
+3. Open a web page to the web.py server. Usually [//localhost:8080](//localhost:8080) will work.
+4. Touch BME280 by finger to see temperature and humidity change on the web app.
 5. Modify : go checkout the API for the [mbed-connector-api-python library](https://docs.mbed.com/docs/mbed-connector-api-python/en/latest/) and make your own applications!
 
 
@@ -28,11 +27,13 @@ python ./app.py
 Here are some common problems and their solutions.
 
 ##### Cannot establish a secure connection
-This is most likely caused by not having the `requests[security]` package installed. If you are using Ubuntu 14.4 LTS you may need to update pip first `pip install -U pip` and then install the requests security package `pip install -U requests[security]`. 
+This is most likely caused by not having the `requests[security]` package installed. If you are using Ubuntu 14.4 LTS you may need to update pip first `pip install -U pip` and then install the requests security package `pip install -U requests[security]`.
 
 ##### WebSocket transport not available
-Dont worry about that warning message, it is not applicable to this demo, but likewise the warning message cannot be disabled. 
+Dont worry about that warning message, it is not applicable to this demo, but likewise the warning message cannot be disabled.
 
 ##### ERROR 500 on trying to run the app.py file
-Make sure you added your [Access Key](https://connector.mbed.com/#accesskeys) to the app. You can do this by either changing the value of the `token` variable in the app.py file or by setting the `ACCESS_KEY` environment variable to your access key. 
+Make sure you added your [Access Key](https://connector.mbed.com/#accesskeys) to the app. You can do this by either changing the value of the `token` variable in the app.py file or by setting the `ACCESS_KEY` environment variable to your access key.
 
+
+Make sure `\views\index.hbs` file is encoded as UTF8.

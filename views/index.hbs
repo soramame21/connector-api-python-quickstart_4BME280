@@ -25,6 +25,7 @@
       <div class="row">
         <div class="small-12 columns">
           <h1>Webapp Quickstart</h1>
+          <h1>mbed祭り　 2017@春の新横浜</h1>
         </div>
       </div>
     </div>
@@ -38,25 +39,25 @@
             </div>
           </div>
           <div class="row">
-            <div class="small-12 medium-6 columns">
-              <h4>Presses: <span class="presses-value">Unknown</span></h4>
-              <label><input type="checkbox" class="subscribe-presses"> Subscribe</label>
-              <button class="get-presses">GET</button>
+            <div class="small-18 medium-22 columns">
+              <h4>       Humidity: <span id="read-humidity">{{humidity_value}}</span></h4>
+              <h4>       Tempereture: <span id="read-tempereture">{{tempereture_value}}</span></h4>
+              <h4>       Pressure: <span id="read-pressure">{{pressure_value}}</span></h4>
             </div>
-            <div class="small-12 medium-6 columns">
-              <h4>LED Blink Pattern</h4>
-              <div>
-                <input type="text" value="{{blinkPattern}}" class="blink-pattern">
-              </div>
-              <div class="row">
-                <div class="small-6 columns">
-                  <button class="update-blink-pattern">Update (PUT)</button>
-                </div>
-                <div class="small-6 columns text-right">
-                  <button class="blink">Blink (POST)</button>
-                </div>
-              </div>
-            </div>
+          </div>
+          <div class="row">
+               <div class="small-12 columns">
+                    <label><input type="checkbox" class="subscribe-presses"> Subscribe</label>
+                    <button class="get-presses">GET</button>
+               </div>
+         </div>
+		</div>
+      </div>
+    {{else}}
+      <div class="small-12 columns">
+        <div class="row">
+          <div class="small-12 columns">
+            <h2>No endpoints connected</h2>
           </div>
         </div>
       </div>
@@ -75,6 +76,7 @@
           _this.find('.subscribe-presses').change(function() {
             if ($(this).is(":checked")) {
               _this.find('.get-presses').prop('disabled', true);
+			  console.log('emitting subscribe_to_presses');
               socket.emit('subscribe_to_presses', {
                 endpointName: _this.attr('id')
               });
@@ -87,37 +89,30 @@
           });
 
           _this.find('.get-presses').on('click', function() {
-            socket.emit('get_presses', {
+		       socket.emit('get_presses', {
               endpointName: _this.attr('id')
             });
           });
+		  });
 
-          _this.find('.blink-pattern').bind('input', function() {
-            _this.find('.update-blink-pattern').addClass('active');
-          })
-
-          _this.find('.update-blink-pattern').on('click', function() {
-            socket.emit('update_blink_pattern', {
-              endpointName: _this.attr('id'),
-              blinkPattern: _this.find('.blink-pattern').val()
-            });
-
-            $(this).removeClass('active');
-          });
-
-          _this.find('.blink').on('click', function() {
-            socket.emit('blink', {
-              endpointName: _this.attr('id')
-            });
-          });
-        });
-
-
-        socket.on('presses', function (data) {
-          console.log('presses', data);
-          $('#' + data.endpointName + ' .presses-value').html(data.value);
-        });
-
+		socket.on('SetTemp', function (data) {
+		  var  tmp_buf=data.value;
+		  var  pair_str = tmp_buf.split(";");
+		  var  val_str=[];
+		  for(var h=0; h<3; h++){
+		      if(pair_str[h]=="end")    break;
+              val_str[h]=pair_str[h].split("=");
+			  if(val_str[h][0]=="e_t")   
+			      $('#read-tempereture').html(val_str[h][1]);
+			  else if(val_str[h][0]=="e_h")
+                  $('#read-humidity').html(val_str[h][1]);
+              else if(val_str[h][0]=="e_p")	
+                  $('#read-pressure').html(val_str[h][1]);				  
+		  }
+          console.log('SetTemp', data);
+          
+       });
+   
         socket.on('subscribed-to-presses', function (data) {
           console.log('subscribed-to-presses', data);
         });
@@ -125,7 +120,6 @@
         socket.on('unsubscribed-to-presses', function (data) {
           console.log('unsubscribed-to-presses', data);
         });
-
       });
     </script>
   </body>
