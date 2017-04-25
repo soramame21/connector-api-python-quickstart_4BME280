@@ -5,7 +5,8 @@ The quickstart webapp is meant to be paired with the [BLEClient_mbedDevConn](htt
 
 ### Pre-requisites
 - A [mbed connector](https://connector.mbed.com) account and have generated an [API token](https://connector.mbed.com/#accesskeys)
-- A endpoint running the [mbed client quickstart example](https://github.com/ARMmbed/mbed-client-quickstart)
+- A endpoint running the [BLEClient_mbedDevConn](https://github.com/soramame21/BLEClient_mbedDevConn)
+- A device running the [BLE_Server_BME280](https://github.com/soramame21/BLE_Server_BME280) for BLE broadcasting data on field
 - Install the required packages `pip install -r requirements.txt`
 
 ### Use
@@ -18,7 +19,7 @@ The quickstart webapp is meant to be paired with the [BLEClient_mbedDevConn](htt
 ```python
 python ./app.py
 ```
-3. Open a web page to the web.py server. Usually [//localhost:8080](//localhost:8080) will work.
+3. Open a web page to the web.py server. Usually [http://localhost:8080](http://localhost:8080) will work.
 4. Touch BME280 by finger to see temperature and humidity change on the web app.
 5. Modify : go checkout the API for the [mbed-connector-api-python library](https://docs.mbed.com/docs/mbed-connector-api-python/en/latest/) and make your own applications!
 
@@ -35,3 +36,6 @@ Dont worry about that warning message, it is not applicable to this demo, but li
 
 ##### ERROR 500 on trying to run the app.py file
 Make sure you added your [Access Key](https://connector.mbed.com/#accesskeys) to the app. You can do this by either changing the value of the `token` variable in the app.py file or by setting the `ACCESS_KEY` environment variable to your access key.
+
+## Screenshot
+![Screenshot of Demo](./static/img/python_BME280_screenshot.png)

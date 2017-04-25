@@ -1,7 +1,7 @@
 import mbed_connector_api                 # mbed Device Connector library
 import pybars                             # use to fill in handlebar templates
 from   flask             import Flask    # framework for hosting webpages
-from   flask_socketio     import SocketIO, emit,send,join_room, leave_room  
+from   flask_socketio     import SocketIO, emit,send,join_room, leave_room
 from   base64             import standard_b64decode as b64decode
 import os
 
@@ -11,7 +11,7 @@ socketio = SocketIO(app,async_mode='threading')
 if 'ACCESS_KEY' in os.environ.keys():
     token = os.environ['ACCESS_KEY'] # get access key from environment variable
 else:
-    token = "YVAkMAsWMRHrrtjZbmho3M1qXIJDlBoZLd4y4M9BJcCGaiizbMygcByMWooN800OLNK21YwSElLrmqEG8WwGyIetrK15yr2Ifo7B" # replace with your API token
+    token = "ChangeMe" # replace with your API token
 
 connector = mbed_connector_api.connector(token)
 
@@ -86,7 +86,7 @@ def unsubscribeToPresses(data):
     else:
         print("Unsubscribed Successfully!")
     emit('unsubscribed-to-presses',{"endpointName":data['endpointName'],"value":'True'})
-    
+
 @socketio.on('get_presses')
 def getPresses(data):
     # Read data from GET resource /3200/0/5501 (num button presses)
