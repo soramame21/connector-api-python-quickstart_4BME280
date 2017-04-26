@@ -25,7 +25,7 @@
       <div class="row">
         <div class="small-12 columns">
           <h1>Webapp Quickstart</h1>
-          <h1>Bluetooth Gateway Demo</h1>
+          <h1>BlE Client with Device Connector </h1>
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
         <div class="small-12 columns">
           <div class="row">
             <div class="small-12 columns">
-              <h4>       Device Name: <span id="{{name}}">{{name}}</span></h4>			
+              <h4>       Device Name: <span id="{{name}}">{{name}}</span></h4>
               <h2></h2>
             </div>
           </div>
@@ -103,17 +103,17 @@
 		  for(var h=0; h<3; h++){
 		      if(pair_str[h]=="end")    break;
               val_str[h]=pair_str[h].split("=");
-			  if(val_str[h][0]=="e_t")   
+			  if(val_str[h][0]=="e_t")
 			      $('#read-tempereture').html(val_str[h][1]);
 			  else if(val_str[h][0]=="e_h")
                   $('#read-humidity').html(val_str[h][1]);
-              else if(val_str[h][0]=="e_p")	
-                  $('#read-pressure').html(val_str[h][1]);				  
+              else if(val_str[h][0]=="e_p")
+                  $('#read-pressure').html(val_str[h][1]);
 		  }
           console.log('SetTemp', data);
-          
+
        });
-   
+
         socket.on('subscribed-to-presses', function (data) {
           console.log('subscribed-to-presses', data);
         });
